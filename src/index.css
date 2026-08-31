@@ -1,0 +1,45 @@
+/* Reset Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Design Tokens */
+:root {
+  --bg-global: #0f172a; /* Slate 900 */
+  --bg-card: #1e293b; /* Slate 800 */
+  --bg-input: #334155; /* Slate 700 */
+  --text-main: #f8fafc; /* Slate 50 */
+  --text-muted: #94a3b8; /* Slate 400 */
+  --brand-primary: #6366f1; /* Indigo 500 */
+  --brand-hover: #4f46e5; /* Indigo 600 */
+  --danger: #ef4444;
+  --radius: 12px;
+  --transition: all 0.2s ease-in-out;
+}
+
+body {
+  background-color: var(--bg-global);
+  color: var(--text-main);
+}
+
+/* Garante que o Header fique no topo, o App no meio e o Footer embaixo */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
