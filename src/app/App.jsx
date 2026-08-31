@@ -8,20 +8,43 @@ function App() {
   });
 
   const [input, setInput] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
 
-  // Função para adicionar uma tarefa na lista
-  const handleAdd = () => {
+  // Função para Salvar uma tarefa
+  const handleSave = () => {
+    // se o input estiver vazio não esta editando
     if (!input.trim()) return;
-    setTarefas([...tarefas, input]);
+
+    if (editIndex !== null) {
+      const updatedTarefa = [...tarefas];
+      updatedTarefa[editIndex] = input;
+      setTarefas(updatedTarefa);
+      setEditIndex(null);
+    } else {
+      setTarefas([...tarefas, input]);
+    }
+
+    // limpar o input no fim
     setInput("");
   };
 
-  // Função para deletar tarefas da lista
+  // Função para deletar tarefa
   const handleDelete = (indexToDelete) => {
     const updatedTarefas = tarefas.filter(
       (_, index) => index !== indexToDelete,
     );
     setTarefas(updatedTarefas);
+
+    if (indexToDelete === editIndex) {
+      setEditIndex(null);
+      setInput("");
+    }
+  };
+
+  // Função para editar uma tarefa
+  const handleEdit = (index) => {
+    setInput(tarefas[index]);
+    setEditIndex(index);
   };
 
   useEffect(() => {
@@ -50,21 +73,30 @@ function App() {
             onChange={(e) => setInput(e.target.value)}
           />
 
-          <button type="button" onClick={handleAdd} disabled={!input.trim()}>
-            {input.trim() ? "Adicionar" : "Bloqueado"}
+          <button type="button" onClick={handleSave} disabled={!input.trim()}>
+            {editIndex !== null ? "Salvar" : "Adicionar"}
           </button>
         </div>
         <ul className="task-list">
           {tarefas.map((task, index) => (
             <li key={index} className="task-item">
               <span>{task}</span>
-              <button
-                type="button"
-                className="btn-delete"
-                onClick={() => handleDelete(index)}
-              >
-                Excluir
-              </button>
+              <div>
+                <button
+                  className="btn-delete"
+                  type="button"
+                  onClick={() => handleDelete(index)}
+                >
+                  Excluir
+                </button>
+                <button
+                  className="btn-edit"
+                  type="button"
+                  onClick={() => handleEdit(index)}
+                >
+                  Editar
+                </button>
+              </div>
             </li>
           ))}
         </ul>

@@ -107,11 +107,13 @@
   animation: fadeIn 0.2s ease-out;
 }
 
-.btn-delete {
+.btn-delete,
+.btn-edit {
   background: transparent;
   border: none;
   color: var(--text-muted);
   font-size: 0.85rem;
+  margin-left: 5px;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 6px;
@@ -120,6 +122,10 @@
 
 .btn-delete:hover {
   color: var(--danger);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+.btn-edit:hover {
+  color: var(--alert);
   background-color: rgba(239, 68, 68, 0.1);
 }
 
