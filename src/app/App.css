@@ -19,12 +19,17 @@
   margin-bottom: 24px;
   letter-spacing: -0.5px;
 }
+.tarefas-memo {
+  margin-bottom: 50px;
+  color: #6398f1;
+}
 
 /* Área de Input e Botão */
 .input-group {
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  margin-top: 10px;
 }
 
 .input-group input {

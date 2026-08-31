@@ -30,7 +30,6 @@ body {
   color: var(--text-main);
 }
 
-/* Garante que o Header fique no topo, o App no meio e o Footer embaixo */
 #root {
   display: flex;
   flex-direction: column;
