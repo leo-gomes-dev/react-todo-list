@@ -23,6 +23,7 @@
   --brand-primary: #6366f1; /* Indigo 500 */
   --brand-hover: #4f46e5; /* Indigo 600 */
   --danger: #ef4444;
+  --danger-hover: #bb1212;
   --alert: #bdb21b;
   --radius: 12px;
   --transition: all 0.2s ease-in-out;

@@ -25,7 +25,7 @@ function App() {
     }
 
     // limpar o input no fim
-    setInput("");
+    handleCancel();
   };
 
   // Função para deletar tarefa
@@ -36,8 +36,7 @@ function App() {
     setTarefas(updatedTarefas);
 
     if (indexToDelete === editIndex) {
-      setEditIndex(null);
-      setInput("");
+      handleCancel();
     }
   };
 
@@ -45,6 +44,11 @@ function App() {
   const handleEdit = (index) => {
     setInput(tarefas[index]);
     setEditIndex(index);
+  };
+
+  const handleCancel = () => {
+    setInput("");
+    setEditIndex(null);
   };
 
   useEffect(() => {
@@ -73,10 +77,28 @@ function App() {
             onChange={(e) => setInput(e.target.value)}
           />
 
-          <button type="button" onClick={handleSave} disabled={!input.trim()}>
-            {editIndex !== null ? "Salvar" : "Adicionar"}
-          </button>
+          <div className="div-btn">
+            <button
+              className="btn-salvar"
+              type="button"
+              onClick={handleSave}
+              disabled={!input.trim()}
+            >
+              {editIndex !== null ? "Salvar" : "Adicionar"}
+            </button>
+
+            {editIndex !== null && (
+              <button
+                className="btn-cancel"
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancelar
+              </button>
+            )}
+          </div>
         </div>
+
         <ul className="task-list">
           {tarefas.map((task, index) => (
             <li key={index} className="task-item">
