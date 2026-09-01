@@ -58,7 +58,7 @@ react/
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/leo-gomes-dev/react-todo-list.git
    ```
 
 2. **Entre na pasta do projeto:**
