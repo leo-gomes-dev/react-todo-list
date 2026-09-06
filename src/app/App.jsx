@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
+import { toast } from "react-toastify";
 
 function App() {
   const [tarefas, setTarefas] = useState(() => {
@@ -9,6 +10,8 @@ function App() {
 
   const [input, setInput] = useState("");
   const [editIndex, setEditIndex] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [taskToDeleteIndex, setTaskToDeleteIndex] = useState(null);
 
   // Função para Salvar uma tarefa
   const handleSave = (e) => {
@@ -26,20 +29,44 @@ function App() {
       setTarefas([...tarefas, input]);
     }
 
+    toast.success("Salvo com sucesso!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
     // limpar o input no fim
     handleCancel();
   };
 
-  // Função para deletar tarefa
-  const handleDelete = (indexToDelete) => {
-    const updatedTarefas = tarefas.filter(
-      (_, index) => index !== indexToDelete,
-    );
-    setTarefas(updatedTarefas);
+  const handleOpenModal = (index) => {
+    setTaskToDeleteIndex(index);
+    setIsModalOpen(true);
+  };
 
-    if (indexToDelete === editIndex) {
-      handleCancel();
+  const handleCloseModal = () => {
+    setTaskToDeleteIndex(null);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    if (taskToDeleteIndex !== null) {
+      const updatedTarefas = tarefas.filter(
+        (_, index) => index !== taskToDeleteIndex,
+      );
+
+      setTarefas(updatedTarefas);
+
+      if (taskToDeleteIndex === editIndex) {
+        handleCancel();
+      }
     }
+    handleCloseModal();
   };
 
   // Função para editar uma tarefa
@@ -99,6 +126,33 @@ function App() {
             )}
           </div>
         </form>
+        {isModalOpen && (
+          <div className="modal-overlay" onClick={handleCloseModal}>
+            {/* O stopPropagation impede que o modal feche se você clicar dentro da caixinha branca */}
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <h2>Excluir Tarefa?</h2>
+              <p>
+                Você tem certeza que deseja deletar esta tarefa? Esta ação não
+                poderá ser desfeita.
+              </p>
+
+              <div className="modal-buttons">
+                <button
+                  className="btn-confirmar-modal"
+                  onClick={handleConfirmDelete}
+                >
+                  Sim, excluir
+                </button>
+                <button
+                  className="btn-cancelar-modal"
+                  onClick={handleCloseModal}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <ul className="task-list">
           {tarefas.map((task, index) => (
@@ -108,7 +162,7 @@ function App() {
                 <button
                   className="btn-delete"
                   type="button"
-                  onClick={() => handleDelete(index)}
+                  onClick={() => handleOpenModal(index)}
                 >
                   Excluir
                 </button>

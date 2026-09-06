@@ -32,6 +32,7 @@
 body {
   background-color: var(--bg-global);
   color: var(--text-main);
+  overflow: hidden;
 }
 
 #root {
@@ -45,4 +46,122 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* --- ESTILIZAÇÃO DO MODAL --- */
+
+/* Fundo escurecido e levemente desfocado atrás do modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(
+    15,
+    23,
+    42,
+    0.75
+  ); /* Mesma base do seu --bg-global com opacidade */
+  backdrop-filter: blur(4px); /* Efeito de vidro focado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Caixa centralizada do modal */
+.modal-content {
+  background-color: var(--bg-card); /* Mantém o padrão slate 800 do seu card */
+  border: 1px solid var(--bg-input); /* Borda sutil */
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  max-width: 400px;
+  width: 90%; /* Responsivo para celulares */
+  text-align: center;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  animation: scaleUp 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Ícone de aviso amarelo */
+.modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.modal-content h2 {
+  color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Container de botões */
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Botões do Modal */
+.modal-buttons button {
+  flex: 1; /* Faz os dois botões terem exatamente o mesmo tamanho */
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+/* Botão Confirmar (Vermelho de Perigo) */
+.btn-confirmar-modal {
+  background-color: var(--danger);
+  color: var(--text-main);
+}
+
+.btn-confirmar-modal:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Botão Cancelar (Cinza Sutil) */
+.btn-cancelar-modal {
+  background-color: var(--bg-input);
+  color: var(--text-main);
+}
+
+.btn-cancelar-modal:hover {
+  background-color: #475569; /* Slate 600 */
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
