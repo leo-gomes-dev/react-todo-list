@@ -1,0 +1,49 @@
+/* Efeito de tarefa concluída */
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.task-text {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Grupo de botões da tarefa */
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit {
+  background: transparent;
+  border: none;
+  color: var(--brand-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.btn-edit:hover:not(:disabled) {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.btn-edit:disabled {
+  color: var(--text-muted);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Botão de Cancelar Edição no topo */
+.btn-cancel {
+  background-color: var(--bg-input) !important;
+  color: var(--text-main) !important;
+}
+
+.btn-cancel:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
